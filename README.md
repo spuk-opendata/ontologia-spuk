@@ -1,6 +1,2 @@
 ﻿# ontologia-spuk
-Repositório com ontologia e documentação da ontologia SPUK
-
-Teste2 commit Helena
-
-teste jair
+Repositório contendo a documentação e a ontologia geradas no âmbito do projeto SPUK.

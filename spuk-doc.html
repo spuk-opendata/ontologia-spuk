@@ -24,7 +24,7 @@
                     companyURL: "http://ceweb.br/" },
           ],
           subtitle: "Documentação Ontologia SPUK",
-          publishDate: "2016-02-18",
+          publishDate: "2016-02-22",
           // additionalCopyrightHolders: "SPUK Project",
           // previousMaturity: "FPWD",
           // previousPublishDate:  "1977-03-15",
@@ -34,29 +34,402 @@
           // wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/424242/status",
       };
     </script>
+
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      table td, table th {
+        border: 1px solid black;
+        padding: 10px;
+      }
+      table.spuk-spec {
+        margin-bottom: 20px;
+      }
+      table.spuk-spec tr:first-child td:first-child {
+        width: 25%;
+      }
+
+    </style>
+
   </head>
   <body>
-    <section id='abstract'>
+<!--     <section id='abstract'>
       <p>
         This document describes the proper process involved in the capturing and caring
         for the more common farm animals.
       </p>
     </section>
-
-    <section id='sotd'>
-      <p>
-        This is probably the froodiest document that you will read all year. It has
-        been authored using new means of achieving consensus that have been made 
-        possible through nanoethanol implants.
-      </p>
-    </section>
-    
+ -->
     <section>
-      <h2>Introduction</h2>
-      <p>
-        Once upon a time, there was a working group that needed to write a 
-        specification using nothing but [[!HTML5]].
-      </p>
+      <h2>Introdução</h2>
+      <p>Este documento descreve uma ontologia de indicadores criada no âmbito do Projeto SPUK - Melhorando o Ambiente de Negócios por Meio da Transparência no Estado de São Paulo. O projeto é uma parceria entre a Embaixada Britânica no Brasil, o Governo do Estado de São Paulo, por meio da Unidade de Inovação em Governo (<a href="http://igovsp.net/">iGovSP</a>) da Subsecretaria de Parcerias e Inovação da Secretaria de Governo, e o Comitê Gestor da Internet (<a href="http://cgi.br/">CGI.br</a>) / Núcleo de Informação e Coordenação do Ponto BR (<a href="http://nic.br/">NIC.br</a>), por meio do <a href="http://ceweb.br/">Ceweb.br</a> (Centro de Estudos sobre Tecnologias Web) como agente implementador. Ele busca reforçar a política de uso de dados abertos, baseando-se na experiência do Reino Unido.</p>
+      <p>Os objetivos são: o Governo do Estado de São Paulo aumentar em pelo menos 70% o número de bases de dados em formato aberto, plenamente acessíveis e disponibilizadas em linguagem compreensível para qualquer cidadão; e ter um mínimo de 3% das bases abertas com dados estruturados em conformidade com os preceitos da Web Semântica, no site Governo Aberto SP.</p>
+      <p>A ontologia apresentada neste documento descreve os conceitos relacionados à descrição de dados e indicadores da área de Saúde. Na versão atual da ontologia foi contemplado o indicador que diz respeito à proporção do número de casos de pacientes curados até 31 de dezembro do ano de avaliação em relação ao número de casos diagnosticados de determinada doença identificada a partir do código CID10. Os indicadores são avaliados anualmente de acordo com espaço geográfico municipal do estado de São Paulo, dando a possibilidade de recuperação dos dados por Departamento Regional de Saúde (DRS) e Redes Regionais de Atenção à Saúde (RRAS), abrangendo informações demográficas municipais.</p>
+    </section>
+
+    <section>
+      <h2>Namespaces</h2>
+      <p>O namespace da ontologia SPUK é <pre>http://www.governoaberto.sp.gov.br/ontologia/spuk#</pre>
+Contudo, a ontologia faz uso de termos de outros vocabulários, como SKOS, Dublin Core e o DBPedia Ontology. Uma lista completa dos namespaces e prefixos usados neste documento é apresentada a seguir.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Prefix</th>
+            <th>Namespace</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dbo</td>
+            <td>http://dbpedia.org/ontology/</td>
+          </tr>
+          <tr>
+            <td>dct </td>
+            <td>http://purl.org/dc/terms/</td>
+          </tr>
+          <tr>
+            <td>org</td>
+            <td>http://www.w3.org/ns/org#</td>
+          </tr>
+          <tr>
+            <td>owl</td>
+            <td>http://www.w3.org/2002/07/owl#</td>
+          </tr>
+          <tr>
+            <td>rdf </td>
+            <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#</td>
+          </tr>
+          <tr>
+            <td>rdfs</td>
+            <td>http://www.w3.org/2000/01/rdf-schema#</td>
+          </tr>
+          <tr>
+            <td>skos</td>
+            <td>http://www.w3.org/2004/02/skos/core#</td>
+          </tr>
+          <tr>
+            <td>spuk</td>
+            <td>http://www.governoaberto.sp.gov.br/ontologia/spuk#</td>
+          </tr>
+          <tr>
+            <td>xsd</td>
+            <td>http://www.w3.org/2001/XMLSchema#</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Visão geral da Ontologia SPUK</h2>
+      <img src="./diagrama-ontologia-spuk.png" alt="Diagrama da Ontologia SPUK">
+    </section>
+
+    <section id="especificacao">
+      <h2>Especificação</h2>
+      <section>
+        <h3>Classes</h3>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>spuk:IndicadorCuradoDiagnosticado</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Indicador operacional de vigilância epidemiológica que expressa o percentual de casos curados em relação à quantidade de casos novos diagnosticados. O indicador é referido a determinada doença, período e localização</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td>Utilizada para descrição de dados de indicadores calculados a partir da fórmula "número de casos curados" sobre "número de casos diagnosticados".</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>spuk:Place</td>
+          </tr>
+          <tr>
+            <td>subClassOf</td>
+            <td>dbo:PopulatedPlace</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>spuk:Population</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Conjunto de pessoas que habitam qualquer divisão geográfica.</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>dbo:PopulatedPlace</td>
+          </tr>
+          <tr>
+            <td>subClassOf</td>
+            <td>dbo:Place</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Conforme definido pela Pesquisa Geológica dos Estados Unidos, um lugar populado  é um lugar ou área com edifícios e uma população humana permanente (cidade,assentamento, vila ou aldeia) referenciados com coordenadas geográficas (http://en.wikipedia.org/wiki/ Populated_place).</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>spuk:DRS</td>
+          </tr>
+          <tr>
+            <td>subClassOf</td>
+            <td>org:OrganizationalUnit</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>A divisão administrativa da Secretaria de Estado da Saúde de São Paulo se faz através dos Departamentos Regionais de Saúde - DRS, atendendo ao Decreto DOE nº 51.433, de 28 de dezembro de 2006. Por meio deste Decreto o Estado foi dividido em 17 Departamentos de Saúde, que são responsáveis por coordenar as atividades da Secretaria de Estado da Saúde no âmbito regional e promover a articulação intersetorial, com os municípios e organismos da sociedade civil.</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>spuk:RRAS</td>
+          </tr>
+          <tr>
+            <td>subClassOf</td>
+            <td>org:OrganizationalUnit</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>De acordo com a Portaria GM/MS nº 4279/10, as Redes Regionais de Atenção à Saúde – RRAS - são definidas como arranjos organizativos de ações e serviços de saúde, de diferentes densidades tecnológicas, que integradas por meio de sistemas de apoio técnico, logístico e de gestão, buscam garantir a integralidade do cuidado em um determinado território. São caracterizadas pela formação de relações horizontais organizadas, sistematizadas e reguladas entre a atenção básica e os demais pontos de atenção do sistema de saúde.</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Classe</td>
+            <td>dbo:Disease</td>
+          </tr>
+          <tr>
+            <td>subClassOf</td>
+            <td>dbo:Medicine</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Doença é um conjunto de sinais e sintomas específicos que afetam um ser vivo, alterando o seu estado normal de saúde.
+            A doença é caracterizada como ausência de saúde, um estado que ao atingir um indivíduo provoca distúrbios das funções  físicas e mentais. Pode ser causada por fatores exógenos (externos, do ambiente) ou endógenos (internos, do próprio organismo).</td>
+          </tr>
+          <tr>
+            <td>Nota de uso</td>
+            <td></td>
+          </tr>
+        </table>
+
+Entende-se como Unidade Organizacional: estabelecimentos de ensino, diretorias, assessorias, centros, colégios militares, seções, subseções, dentre outros.
+      </section>
+
+      <section>
+        <h3>Propriedades</h3>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:ibge6</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Código dos municípios de acordo com o IBGE, composto de 6 dígitos, sendo os dois primeiros referentes ao código do estado. Esta tabela, que reflete a organização do território, é utilizada não apenas pelo IBGE para o processamento das informações de suas pesquisas e cadastros, como também por outras instituições.</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:Place</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>xsd:int (nonNegativeInteger)</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:valorCalculado</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Valor percentual do indicador, que expressa a proporção de casos curados em relação à de casos curados.</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:IndicadorCuradoDiagnosticado</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>xsd:double</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:quantidadeCasosCurados</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Número de casos curados notificados para a vigilância epidemiológica até 31 de dezembro do ano de avaliação. São sempre referidos a uma doença, período e local.</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:IndicadorCuradoDiagnosticado</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>xsd:int (nonNegativeInteger)</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:quantidadeCasosDiagnosticados</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Número de casos diagnosticados notificados para a vigilância epidemiológica. São sempre referidos a uma doença, período e local.</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:IndicadorCuradoDiagnosticado</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>xsd:int (nonNegativeInteger)</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:areaTotalKm</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Área territorial total (urbana e rural) da localidade expressos em km². <br>
+            Conforme a resolução do IBGE, nº PR-04, de 22 de dezembro de 2014, os dados de áreas das superfícies dos Estados e Municípios incorporam as alterações de limites territoriais municipais ocorridas após o Censo Demográfico 2010 e praticadas nas Estimativas Populacionais de 2011, 2012 e 2013, bem como demais ajustes ocorridos neste período. Esses ajustes são feitos em função de alterações de natureza legal, judicial ou pela ampliação contínua de melhores representações cartográficas dos polígonos estaduais e municipais com o apoio de novas geotecnologias, utilizadas na estruturação da Base Territorial.</td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:Place</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>xsd:double</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>dct:temporal</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>Período de 12 meses que corresponde a 365 dias do ano, contados a partir de 1 de Janeiro a 31 de Dezembro.</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>dct:PeriodOfTime</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>dbo:populationTotal</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td>População Total é o número total de habitantes de um lugar (país, cidade, estado e etc.).</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>nonNegativeInteger</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:refersToPlace</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:IndicadorCuradoDiagnosticado</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>spuk:Place</td>
+          </tr>
+        </table>
+
+        <table class="spuk-spec">
+          <tr>
+            <td>Propriedade</td>
+            <td>spuk:belongsToUnit</td>
+          </tr>
+          <tr>
+            <td>Descrição</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>spuk:Place</td>
+          </tr>
+          <tr>
+            <td>Range</td>
+            <td>org:OrganizationalUnit</td>
+          </tr>
+        </table>
+
+
+      </section>
     </section>
   </body>
 </html>
